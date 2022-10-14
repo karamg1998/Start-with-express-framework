@@ -13,7 +13,7 @@ const router=express.Router();
     
     console.log('name of product is '+req.body.title);
     console.log('size of product is '+req.body.size);
-    res.redirect('/');
+    res.redirect('/shop');
     });
     
 
