@@ -1,9 +1,10 @@
 const express=require('express');
 const path=require('path');
+const root=require('../helper function/path.js')
 
 const router=express.Router();
     router.get('/add-product',(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'../','views','admin.html'));
+    res.sendFile(path.join(root,'views','admin.html'));
     });
     
     router.use('/add-product',(req,res,next)=>{
