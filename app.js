@@ -1,11 +1,15 @@
 const express=require('express');
 const bodyParser=require('body-parser');
 const app=express();
-app.use(bodyParser.urlencoded({extended: false}));
+const path=require('path');
+const root=require('./helper function/path.js')
 const adminRoutes=require('./routes/admin.js');
 const shopRoutes=require('./routes/shop.js');
 const contactRoutes=require('./routes/contact.js');
-const path=require('path');
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+const admin=require('./controllers/error.js')
 
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -14,7 +18,5 @@ app.use(contactRoutes);
 app.use(shopRoutes);
 
 
-app.use((req,res,next)=>{
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
-})
+app.use(admin.error);
 app.listen(3000);

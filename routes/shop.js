@@ -1,14 +1,10 @@
 const express=require('express');
-const path=require('path');
+
 const router=express.Router();
-const root=require('../helper function/path.js')
+const admin=require('../controllers/products.js')
 
-router.get('/',(req,res,next)=>{
-    res.sendFile(path.join(root,'views','shop.html'));
-    });
+router.get('/',admin.shopGet);
 
-    router.get('/success',(req,res,next)=>{
-        res.sendFile(path.join(root,'views','success.html'));
-        });
+    router.get('/success',admin.shopSuccess);
 
     module.exports=router;
