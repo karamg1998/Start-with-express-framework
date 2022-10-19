@@ -1,20 +1,29 @@
-const path=require('path');
-const root=require('../helper function/path.js')
+const Product = require('../models/product.js')
 
-exports.adminGet=(req,res,next)=>{
-    res.sendFile(path.join(root,'views','admin.html'));
-    };
+exports.getAddProduct = (req, res, next) => {
+  res.render('add-product', {
+    pageTitle: 'Add Product',
+    path: '/admin/add-product',
+    formsCSS: true,
+    productCSS: true,
+    activeAddProduct: true
+  });
+};
 
-    exports.adminPost=(req,res,next)=>{
-        console.log('name of product is '+req.body.title);
-    
-        res.redirect('/');
-        };
+exports.postAddProduct = (req, res, next) => {
+  const product=new Product(req.body.title);
+  product.save();
+  res.redirect('/');
+};
 
-       exports.shopGet=(req,res,next)=>{
-        res.sendFile(path.join(root,'views','shop.html'));
-        };
-
-        exports.shopSuccess=(req,res,next)=>{
-            res.sendFile(path.join(root,'views','success.html'));
-            }
+exports.getProducts = (req, res, next) => {
+  const products=Product.fetchAll();
+  res.render('shop', {
+    prods: products,
+    pageTitle: 'Shop',
+    path: '/',
+    hasProducts: products.length > 0,
+    activeShop: true,
+    productCSS: true
+  });
+};

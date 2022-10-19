@@ -1,6 +1,3 @@
-const path=require('path');
-const root=require('../helper function/path.js')
-
-exports.error=(req,res,next)=>{
-    res.status(404).sendFile(path.join(root,'views','404.html'));
+exports.get404 = (req, res, next) => {
+  res.status(404).render('404', { pageTitle: 'Page Not Found' });
 };
